@@ -1,0 +1,6 @@
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\obj\Debug\WC1308-EAB Assembler1.csprojAssemblyReference.cache
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\obj\Debug\WC1308-EAB Assembler1.csproj.CoreCompileInputs.cache
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\bin\Debug\asm.exe
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\bin\Debug\asm.pdb
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\obj\Debug\asm.exe
+C:\Users\Bitwise\Desktop\C# Projects\WC1308-EAB Assembler1\WC1308-EAB Assembler1\obj\Debug\asm.pdb
