@@ -1,0 +1,18 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader/subproject",
+    "build_dir":          "C:/Users/Bitwise/Desktop/esp-idf-real/WC1308-EAL_RAMWriter/build/bootloader",
+    "config_file":        "C:/Users/Bitwise/Desktop/esp-idf-real/WC1308-EAL_RAMWriter/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.0.1-dirty",
+    "phy_data_partition": "",
+    "monitor_baud" : "115200",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "C:/Users/Bitwise/Desktop/esp-idf-real/components/efuse/Kconfig;C:/Users/Bitwise/Desktop/esp-idf-real/components/esp32/Kconfig;C:/Users/Bitwise/Desktop/esp-idf-real/components/esp_common/Kconfig;C:/Users/Bitwise/Desktop/esp-idf-real/components/log/Kconfig;C:/Users/Bitwise/Desktop/esp-idf-real/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader/Kconfig.projbuild;C:/Users/Bitwise/Desktop/esp-idf-real/components/esptool_py/Kconfig.projbuild;C:/Users/Bitwise/Desktop/esp-idf-real/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_rom", "esptool_py", "log", "main", "micro-ecc", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader", "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader_support", "C:/Users/Bitwise/Desktop/esp-idf-real/components/efuse", "C:/Users/Bitwise/Desktop/esp-idf-real/components/esp32", "C:/Users/Bitwise/Desktop/esp-idf-real/components/esp_common", "C:/Users/Bitwise/Desktop/esp-idf-real/components/esp_rom", "C:/Users/Bitwise/Desktop/esp-idf-real/components/esptool_py", "C:/Users/Bitwise/Desktop/esp-idf-real/components/log", "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader/subproject/main", "C:/Users/Bitwise/Desktop/esp-idf-real/components/bootloader/subproject/components/micro-ecc", "C:/Users/Bitwise/Desktop/esp-idf-real/components/partition_table", "C:/Users/Bitwise/Desktop/esp-idf-real/components/soc", "C:/Users/Bitwise/Desktop/esp-idf-real/components/spi_flash", "C:/Users/Bitwise/Desktop/esp-idf-real/components/xtensa", "" ]
+}
