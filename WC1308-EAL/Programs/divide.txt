@@ -1,0 +1,30 @@
+;base 16
+LAI	45
+STA	FE	#dividend
+LAI	03
+STA	FF	#divisor (decrementer)
+LAI	00
+STA	FD	#init quotient (incrementer)
+LDA	FF
+CPI	00
+JZ	youMessedUp	#check for divide by zero
+.loop
+LDA	FE
+CMP	FF
+JC	done	#Load dividend, compare with divisor, if underflow jump to end of prog
+SUR
+STA	FE	#if not subtract and store "new" dividend
+LDA	FD
+INC
+STA	FD	#increment quotient
+JMP	loop
+.done
+OPM	FD
+HLT
+.youMessedUp
+DSP	6F
+NOP
+NOP
+DSP	00
+NOP
+JMP	youMessedUp

@@ -1,0 +1,13 @@
+;base 16
+PUI	04
+PUI	05
+CAL	add
+PON
+PON
+HLT
+.add
+LAS	02
+ADS	01
+OUT
+SAS	02
+RET

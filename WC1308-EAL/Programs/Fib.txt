@@ -1,0 +1,18 @@
+;base 16
+#Fibonacci Sequence
+.start
+LAI	1
+STA	FF
+LAI	0
+.loop
+STA	FE
+OUT
+LDA	FF
+ADD	FE
+JC	start
+STA	FF
+OUT
+LDA	FE
+ADD	FF
+JC	start
+JMP	loop

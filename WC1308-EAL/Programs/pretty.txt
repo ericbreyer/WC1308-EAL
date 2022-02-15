@@ -1,0 +1,27 @@
+;base 16
+#Count Up to A and Down to B
+#
+#Load count difference
+.resetCount
+LAI	01
+STA	FF
+LAI	00
+#count up loop
+.up
+OUT
+ADD	FF
+JNC	up
+#count down loop
+.down
+SUB	FF
+OUT
+JNZ	down
+#inc count
+.incCount
+LDA	FF
+INC
+STA	FF
+CPI	80
+JZ	resetCount
+LAI	00
+JMP	up

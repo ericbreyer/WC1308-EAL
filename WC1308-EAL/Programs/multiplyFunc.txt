@@ -1,0 +1,32 @@
+;base	16
+PUN
+PUI	04
+PUI	05
+CAL	mult
+PON
+PON
+POA
+OUT
+HLT
+#--Mult Function--#
+#return value		at stack + 4
+#load X 			at stack + 3
+#load y (decrementer) 	at stack + 2
+#return address		at stack + 1
+#local var - product	at stack + 0
+.mult
+PUI	00	#init product local var
+.loop
+LAS	02
+CPI	00
+JZ	end	#check if decrement is 0 and program is done
+DEC
+SAS	02
+LAS	00	#if not, add x to product again
+ADS	03
+SAS	00
+JMP	loop
+.end
+POA
+SAS	03	#stack + 03 is ret val after local is popped
+RET

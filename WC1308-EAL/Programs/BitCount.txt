@@ -1,0 +1,19 @@
+;base 16
+LAI	F0
+STA	FF		#Input
+LAI	0		
+STA	FE		#init answer
+.shift
+LDA	FF
+ADD	FF
+STA	FF
+JC	addOne		#if the cary is one add one to the answer
+.continue
+OPM	FE
+JNZ	shift
+HLT
+.addOne
+LDA	FE
+INC
+STA	FE
+JMP	continue

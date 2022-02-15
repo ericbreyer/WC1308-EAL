@@ -1,0 +1,20 @@
+;base 16
+LAI	0A	
+STA	FE	#load X
+LAI	0B	
+STA	FD	#load y - also decrementer
+LAI	00	
+STA	FF	#init product
+.loop
+LDA	FD
+CPI	00
+JZ	end	#check if decrement is 0 and program is done
+DEC
+STA	FD
+LDA	FF	#if not, add x to product again
+ADD	FE
+STA	FF
+JMP	loop
+.end
+OPM	FF
+HLT

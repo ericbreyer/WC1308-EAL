@@ -1,0 +1,26 @@
+;base 16
+#Count Up to A and Down to B
+#
+#Load top value
+LAI	F0
+STA	FE
+#
+#Load bottom value
+LAI	C0
+STA	FF
+#
+#Program start (min already loaded)
+#count up loop
+.up
+OUT
+INC
+CMP	FE
+NOP
+JNZ	up
+#count down loop
+.down
+OUT
+DEC
+CMP	FF
+JZ	up
+JMP	down

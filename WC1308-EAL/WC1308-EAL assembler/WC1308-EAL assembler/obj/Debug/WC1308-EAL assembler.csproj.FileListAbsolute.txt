@@ -1,6 +1,12 @@
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\obj\Debug\WC1308-EAL assembler.csproj.CoreCompileInputs.cache
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\bin\Debug\asm.exe
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\bin\Debug\asm.pdb
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\obj\Debug\asm.exe
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\obj\Debug\asm.pdb
-C:\perforce\WC1308-EAL\WC1308-EAL assembler\WC1308-EAL assembler\obj\Debug\WC1308-EAL assembler.csprojAssemblyReference.cache
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/WC1308-EAL assembler.csproj.CoreCompileInputs.cache
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/bin/Debug/asm.exe
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/bin/Debug/asm.pdb
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/asm.exe
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/asm.pdb
+C:/perforce/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/WC1308-EAL assembler.csprojAssemblyReference.cache
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/bin/Debug/asm.exe
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/bin/Debug/asm.pdb
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/WC1308-EAL assembler.csproj.CoreCompileInputs.cache
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/asm.exe
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/asm.pdb
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL assembler/WC1308-EAL assembler/obj/Debug/WC1308-EAL assembler.csprojAssemblyReference.cache

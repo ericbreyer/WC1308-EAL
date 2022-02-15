@@ -171,6 +171,7 @@ namespace WC1308_EAL_Assembler {
                         continue;
                     }
                 }
+
                 //......FEATURE NOT FULLY ADDED YET......//
                 //if specifying adress for a label (or other code), hard update next adress
                 //TODO: also need to update in sending array
@@ -190,7 +191,7 @@ namespace WC1308_EAL_Assembler {
                     Labels.Add(label, (byte)(nextAddress));
                 }
                 //if the line is an opcode that takes up one line in RAM (only opcode no operand), add one to the nextAddress
-                else if (token[0] == "NOP" || token[0] == "OUT" || token[0] == "ADR" || token[0] == "SUR" || token[0] == "INC" || token[0] == "DEC" || token[0] == "HLT") {
+                else if (token[0] == "NOP" || token[0] == "OUT" || token[0] == "ADR" || token[0] == "SUR" || token[0] == "INC" || token[0] == "DEC" || token[0] == "HLT" || token[0] == "PUN" || token[0] == "PUA" || token[0] == "PON" || token[0] == "POA" || token[0] == "RET") {
                     ++nextAddress;
                 }
                 //if the line is an opcode that takes up two lines in RAM (opcode and operand), add two to the nextAddress
@@ -247,26 +248,26 @@ namespace WC1308_EAL_Assembler {
                     assembled.Add(0b00000101);
                 }
                 else if (token[0].ToUpper() == "SUB") {
-                    assembled.Add(0b00000111);
+                    assembled.Add(0b00000110);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "SUI") {
-                    assembled.Add(0b00001000);
+                    assembled.Add(0b00000111);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "SUR") {
-                    assembled.Add(0b00001001);
+                    assembled.Add(0b00001000);
                 }
                 else if (token[0].ToUpper() == "INC") {
-                    assembled.Add(0b00001011);
+                    assembled.Add(0b00001001);
                 }
                 else if (token[0].ToUpper() == "DEC") {
-                    assembled.Add(0b00001100);
+                    assembled.Add(0b00001010);
                 }
                 else if (token[0].ToUpper() == "STA") {
-                    assembled.Add(0b00001101);
+                    assembled.Add(0b00001011);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
@@ -275,7 +276,7 @@ namespace WC1308_EAL_Assembler {
                 //If the label dosen't exist as a key in the dictonary throw an error
                 else if (token[0].ToUpper() == "JMP") {
                     if (Labels.ContainsKey(token[1])) {
-                        assembled.Add(0b00001110);
+                        assembled.Add(0b00001100);
                         assembled.Add(Labels[token[1]]);
                     }
                     else {
@@ -284,7 +285,7 @@ namespace WC1308_EAL_Assembler {
                 }
                 else if (token[0].ToUpper() == "JC") {
                     if (Labels.ContainsKey(token[1])) {
-                        assembled.Add(0b00001111);
+                        assembled.Add(0b00001101);
                         assembled.Add(Labels[token[1]]);
                     }
                     else {
@@ -293,7 +294,7 @@ namespace WC1308_EAL_Assembler {
                 }
                 else if (token[0].ToUpper() == "JZ") {
                     if (Labels.ContainsKey(token[1])) {
-                        assembled.Add(0b00010000);
+                        assembled.Add(0b00001110);
                         assembled.Add(Labels[token[1]]);
                     }
                     else {
@@ -302,7 +303,7 @@ namespace WC1308_EAL_Assembler {
                 }
                 else if (token[0].ToUpper() == "JNC") {
                     if (Labels.ContainsKey(token[1])) {
-                        assembled.Add(0b00010001);
+                        assembled.Add(0b00001111);
                         assembled.Add(Labels[token[1]]);
                     }
                     else {
@@ -311,7 +312,7 @@ namespace WC1308_EAL_Assembler {
                 }
                 else if (token[0].ToUpper() == "JNZ") {
                     if (Labels.ContainsKey(token[1])) {
-                        assembled.Add(0b00010010);
+                        assembled.Add(0b00010000);
                         assembled.Add(Labels[token[1]]);
                     }
                     else {
@@ -319,40 +320,135 @@ namespace WC1308_EAL_Assembler {
                     }
                 }
                 else if (token[0].ToUpper() == "CMP") {
-                    assembled.Add(0b00010011);
+                    assembled.Add(0b00010001);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "CPI") {
-                    assembled.Add(0b00010100);
+                    assembled.Add(0b00010010);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "LDB") {
-                    assembled.Add(0b00010101);
+                    assembled.Add(0b00010011);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "LBI") {
-                    assembled.Add(0b00010110);
+                    assembled.Add(0b00010100);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "DIN") {
+                    assembled.Add(0b00010101);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "DSP") {
-                    assembled.Add(0b00011100);
+                    assembled.Add(0b00010110);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "DSA") {
+                    assembled.Add(0b00010111);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "DSM") {
+                    assembled.Add(0b00011000);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+
+                else if (token[0].ToUpper() == "OPI") {
+                    assembled.Add(0b00011010);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "OPM") {
-                    assembled.Add(0b00011101);
+                    assembled.Add(0b00011011);
                     byte data = Convert.ToByte(token[1], _base);
                     assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "OUT") {
-                    assembled.Add(0b00011110);
+                    assembled.Add(0b00011100);
                 }
                 else if (token[0].ToUpper() == "HLT") {
+                    assembled.Add(0b00011101);
+                }
+                else if (token[0].ToUpper() == "PUM") {
+                    assembled.Add(0b00011110);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "PUI") {
                     assembled.Add(0b00011111);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "PUA") {
+                    assembled.Add(0b00100000);
+                }
+                else if (token[0].ToUpper() == "PUN") {
+                    assembled.Add(0b00100001);
+                }
+                else if (token[0].ToUpper() == "POM") {
+                    assembled.Add(0b00100010);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "POA") {
+                    assembled.Add(0b00100011);
+                }
+                else if (token[0].ToUpper() == "PON") {
+                    assembled.Add(0b00100100);
+                }
+                else if (token[0].ToUpper() == "CAL") {
+                    if (Labels.ContainsKey(token[1])) {
+                        assembled.Add(0b00100101);
+                        assembled.Add(Labels[token[1]]);
+                    }
+                    else {
+                        throw new UnknownLabelException("Unknown Label " + token[1] + " at address line " + i);
+                    }
+                }
+                else if (token[0].ToUpper() == "RET") {
+                    assembled.Add(0b00100110);
+                }
+                else if (token[0].ToUpper() == "LAS") {
+                    assembled.Add(0b00100111);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "ADS") {
+                    assembled.Add(0b00101000);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "SUS") {
+                    assembled.Add(0b00101001);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "CPS") {
+                    assembled.Add(0b00101010);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "LBS") {
+                    assembled.Add(0b00101011);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "OPS") {
+                    assembled.Add(0b00101100);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
+                }
+                else if (token[0].ToUpper() == "SAS") {
+                    assembled.Add(0b00101101);
+                    byte data = Convert.ToByte(token[1], _base);
+                    assembled.Add(data);
                 }
                 //if the operand is invalid throw an error
                 else {

@@ -1,0 +1,21 @@
+;base 16
+LAI	FB 	# Input Number 
+STA	FF
+OUT
+LAI	1
+STA	FE
+.getNewTestNumber
+LDA	FE
+INC
+STA	FE
+#prepare to iteratively subtract test number
+LDA	FF
+.subtractTestNumber
+SUB	FE
+#test stuff
+JZ	done 			#if you hit zero the number divided evenly
+JC	getNewTestNumber	#if you overflow the number didn't divide evenly, get a new number
+JMP	subtractTestNumber	#subtract again to find if it will hit 0 or overflow
+.done
+OPM	FE
+HLT

@@ -1,0 +1,55 @@
+;base 16
+.begin
+LAI	00
+STA	FF
+.loop
+PUN
+PUM	FF
+CAL	fib
+PON
+POA
+OUT
+LDA	FF
+INC
+STA	FF
+CPI	0E
+JZ	begin
+JMP	loop
+# return value		at stack + 2
+# index			at stack + 1
+# return address		at stack + 0
+.fib
+LAS	01
+CPI	02
+JNC	recurse 		#check if index is less than 2
+SAS	02
+RET			#if it is return the index
+# adding two locals
+# fib(n-2)		at stack + 1
+# fib(n-1)		at stack + 0
+.recurse
+PUN			#push local
+PUN			#push local
+#
+PUN			#push ret val
+LAS	04
+DEC
+PUA			#dec index and push
+CAL	fib
+PON
+POA
+SAS	00		#store in local
+PUN			#push ret val
+LAS	04
+ADI	FE
+PUA			#dec index twice and push
+CAL	fib
+PON
+POA
+SAS	01		#store in local
+LAS	00
+ADS	01
+SAS	04
+PON
+PON
+RET
