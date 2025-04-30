@@ -1,5 +1,5 @@
 ;base 16
-LAI	45	# Input Number 
+LAI	DD	# Input Number 
 STA	FF
 STA	FE
 OUT

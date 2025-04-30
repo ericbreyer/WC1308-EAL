@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{4625ABA7-4404-43CD-8796-E31D71AC2456}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WC1308-EAL_C_Compiler/Lexer.cs">
+    <Files>
+      <File FileName="WC1308-EAL_C_Compiler/Program.cs" Line="10" Column="1" />
+      <File FileName="WC1308-EAL_C_Compiler/Lexer.cs" Line="5" Column="10" />
+      <File FileName="WC1308-EAL_C_Compiler/Assembler.cs" Line="16" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WC1308-EAL_C_Compiler" expanded="True">
+            <Node name="WC1308-EAL_C_Compiler" expanded="True">
+              <Node name="Lexer.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.WC1308-EAL__C__Compiler PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

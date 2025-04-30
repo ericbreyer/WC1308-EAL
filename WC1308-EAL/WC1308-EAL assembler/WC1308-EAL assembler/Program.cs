@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using System.Threading;
 
 namespace WC1308_EAL_Assembler {
     class Program {
@@ -15,7 +16,6 @@ namespace WC1308_EAL_Assembler {
         }
 
         static void Main(string[] args) {
-
             //declare vars
             string readFilePath;
             protocols protocol;
@@ -147,10 +147,8 @@ namespace WC1308_EAL_Assembler {
             if (verbose) Console.WriteLine("file closed at " + filePath);
         }
 
-
         //updates dictonary with label/address pairs
         static void parseLabels() {
-
             byte nextAddress = 0;
 
             //iterate through all lines in the file
@@ -191,7 +189,7 @@ namespace WC1308_EAL_Assembler {
                     Labels.Add(label, (byte)(nextAddress));
                 }
                 //if the line is an opcode that takes up one line in RAM (only opcode no operand), add one to the nextAddress
-                else if (token[0] == "NOP" || token[0] == "OUT" || token[0] == "ADR" || token[0] == "SUR" || token[0] == "INC" || token[0] == "DEC" || token[0] == "HLT" || token[0] == "PUN" || token[0] == "PUA" || token[0] == "PON" || token[0] == "POA" || token[0] == "RET") {
+                else if (token[0] == "NOP" || token[0] == "OUT" || token[0] == "ADR" || token[0] == "SUR" || token[0] == "INC" || token[0] == "DEC" || token[0] == "HLT" || token[0] == "PUN" || token[0] == "PUA" || token[0] == "PON" || token[0] == "POA" || token[0] == "RET" || token[0] == "DSA") {
                     ++nextAddress;
                 }
                 //if the line is an opcode that takes up two lines in RAM (opcode and operand), add two to the nextAddress
@@ -205,10 +203,8 @@ namespace WC1308_EAL_Assembler {
         
         //parses all opcodes and operands into binary and puts them into assembled byte list sequentally
         static void assemble() {
-
             //iterate through all lines in the file
             for (int i = 0; i < linesInFile; ++i) {
-
                 //split line on white space, seperates opcode from operand
                 string[] token = lines[i].Split(new char[] { ' ', '\t' });
 
@@ -351,8 +347,8 @@ namespace WC1308_EAL_Assembler {
                 }
                 else if (token[0].ToUpper() == "DSA") {
                     assembled.Add(0b00010111);
-                    byte data = Convert.ToByte(token[1], _base);
-                    assembled.Add(data);
+                    //byte data = Convert.ToByte(token[1], _base);
+                    //assembled.Add(data);
                 }
                 else if (token[0].ToUpper() == "DSM") {
                     assembled.Add(0b00011000);
@@ -553,59 +549,69 @@ namespace WC1308_EAL_Assembler {
 
         //writes assembled list to the TCP socket
         static void wifiOut() {
-            byte[] wifiOut;
-            byte binLength;
+            
 
-            //microcontroler takes a byte array in the form {program length in bytes,address,data,address,data...}
-            //this is building the wifi out array in the correct format from the assembled list
-            binLength = (byte)(assembled.Count);
-            wifiOut = new byte[binLength * 2 + 1];
-            wifiOut[0] = (byte)(binLength);
-            for (int i = 0; i < binLength; i++) {
-                wifiOut.SetValue((byte)i, (byte)(i * 2 + 1));
-                wifiOut.SetValue(assembled[i], (byte)(i * 2 + 2));
-            }
+            for (int half128 = 0; half128 < 2; half128++) {
+                byte[] wifiOut;
+                int binLength;
+                //microcontroler takes a byte array in the form {program length in bytes,address,data,address,data...}
+                //this is building the wifi out array in the correct format from the assembled list
+                binLength = Math.Min(assembled.Count - half128*127,127);
+                //Console.WriteLine(binLength);
+                if (binLength < 0) continue;
+                if (half128 == 1) {
+                    Console.WriteLine("first 128");
+                    Thread.Sleep(10000);
+                }
 
-            try {
+                wifiOut = new byte[binLength * 2 + 1];
+                wifiOut[0] = (byte)(binLength);
+                Console.WriteLine(binLength * 2 + 1);
+                for (int i = 0; i < binLength; i++) {
+                    //Console.WriteLine((i + half128 * 128) + " " + assembled[i + half128 * 128]);
+                    wifiOut.SetValue((byte)(i + half128 * 127), (byte)(i * 2 + 1));
+                    wifiOut.SetValue(assembled[i+ half128 * 127], (byte)(i * 2 + 2));
+                }
 
-                //set ip address, port, and create a TCP socket
-                IPAddress ipAddress = IPAddress.Parse("192.168.4.1");
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, int.Parse(port));
-                Socket sender = new Socket(ipAddress.AddressFamily,
-                    SocketType.Stream, ProtocolType.Tcp);
 
-                //try to connect the socket to the microcontroller. Catch any errors.  
                 try {
-                    sender.Connect(remoteEP);
 
-                    if(verbose) Console.WriteLine("Socket connected to {0}", sender.RemoteEndPoint.ToString());
+                    //set ip address, port, and create a TCP socket
+                    IPAddress ipAddress = IPAddress.Parse("192.168.4.1");
+                    IPEndPoint remoteEP = new IPEndPoint(ipAddress, int.Parse(port));
+                    Socket sender = new Socket(ipAddress.AddressFamily,
+                        SocketType.Stream, ProtocolType.Tcp);
 
-                    // Send byte array through the socket
-                    int bytesSent = sender.Send(wifiOut);
-                    if (verbose) Console.WriteLine("Data written to {0}", sender.RemoteEndPoint.ToString());
-                    // close the socket.  
-                    sender.Shutdown(SocketShutdown.Both);
-                    sender.Close();
-                    if (verbose) Console.WriteLine("Socket closed {0}:{1}", ipAddress.ToString(), port.ToString());
-                }
-                //catch errors
-                catch (ArgumentNullException ane) {
-                    Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                    //try to connect the socket to the microcontroller. Catch any errors.  
+                    try {
+                        sender.Connect(remoteEP);
+
+                        if (verbose) Console.WriteLine("Socket connected to {0}", sender.RemoteEndPoint.ToString());
+
+                        // Send byte array through the socket
+                        int bytesSent = sender.Send(wifiOut);
+                        if (verbose) Console.WriteLine("Data written to {0}", sender.RemoteEndPoint.ToString());
+                        // close the socket.  
+                        sender.Shutdown(SocketShutdown.Both);
+                        sender.Close();
+                        if (verbose) Console.WriteLine("Socket closed {0}:{1}", ipAddress.ToString(), port.ToString());
+                    }
+                    //catch errors
+                    catch (ArgumentNullException ane) {
+                        Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                        Console.Read();
+                    } catch (SocketException se) {
+                        Console.WriteLine("SocketException : {0}", se.ToString());
+                        Console.Read();
+                    } catch (Exception e) {
+                        Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                        Console.Read();
+                    }
+
+                } catch (Exception e) {
+                    Console.WriteLine(e.ToString());
                     Console.Read();
                 }
-                catch (SocketException se) {
-                    Console.WriteLine("SocketException : {0}", se.ToString());
-                    Console.Read();
-                }
-                catch (Exception e) {
-                    Console.WriteLine("Unexpected exception : {0}", e.ToString());
-                    Console.Read();
-                }
-
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.ToString());
-                Console.Read();
             }
         }
     }

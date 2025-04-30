@@ -106,21 +106,21 @@ void printContents() {
 #define UNUSED  0b00000000000000000000010000000000
 #define UCR 0b00000000000000000000000100000000  // microcode reset
 
-#define DRS 0b00000000000000000001000000000000  // display register select (0 instruction/1 data)
-#define DE  0b00000000000000000000001000000000  // display enable
+//#define DRS 0b00000000000000000001000000000000  // display register select (0 instruction/1 data)
+//#define DE  0b00000000000000000000001000000000  // display enable
 
-//#define DRS 0b00000000000000000000000010000000  // display register select (0 instruction/1 data)
-//#define DE  0b00000000000000000000000001000000  // display enable
+#define DRS 0b00000000000000000000000010000000  // display register select (0 instruction/1 data)
+#define DE  0b00000000000000000000000001000000  // display enable
  
 #define FLAGS_Z0C0 0
 #define FLAGS_Z0C1 1
 #define FLAGS_Z1C0 2
 #define FLAGS_Z1C1 3
 
-#define JC  0b01111
-#define JZ  0b10000
-#define JNC  0b10001
-#define JNZ  0b10010
+#define JC  0b01101
+#define JZ  0b01110
+#define JNC  0b01111
+#define JNZ  0b10000
 
 
 uint32_t UCODE[46][8] = {
@@ -170,7 +170,7 @@ uint32_t UCODE[46][8] = {
   { MI|CO,  RO|II|CE,  CO|MI,    RO|OFI|CE,   RAO|MI,   RO|BI|SA|UCR,    0,       0, },   //  101011 - LBS
   { MI|CO,  RO|II|CE,  CO|MI,    RO|OFI|CE,   RAO|MI,   RO|OI|SA|UCR,    0,       0, },   //  101100 - OPS
   { MI|CO,  RO|II|CE,  CO|MI,    RO|OFI|CE,   RAO|MI,   AO|RI|SA,        UCR,     0, },   //  101101 - SAS  
-  
+  { MI|CO,  RO|II|CE,  CO|MI,    MI|RO|CE,    RO|OFI,   RAO|MI,          RO|AI|SA|UCR,0, },   //  101110 - LSM  
 };
 
 /*uint16_t ucode[4][32][6];

@@ -1,0 +1,6 @@
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/bin/Debug/WC1308-EAL_C_Compiler.exe
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/bin/Debug/WC1308-EAL_C_Compiler.pdb
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/obj/Debug/WC1308-EAL_C_Compiler.csprojAssemblyReference.cache
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/obj/Debug/WC1308-EAL_C_Compiler.csproj.CoreCompileInputs.cache
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/obj/Debug/WC1308-EAL_C_Compiler.exe
+/Users/ebreyer/Documents/GitHub/WC1308-EAL/WC1308-EAL/WC1308-EAL_C_Compiler/WC1308-EAL_C_Compiler/obj/Debug/WC1308-EAL_C_Compiler.pdb

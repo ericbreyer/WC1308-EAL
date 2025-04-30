@@ -1,0 +1,137 @@
+;base 2
+PUN
+PUI 11111111
+CAL printf
+HLT
+# return value		at stack + 2
+# num			at stack + 1
+# return address		at stack + 0
+.printf
+LAS 00000001
+PUN
+PUA
+PUI 00001010
+CAL remainder
+PON
+PON
+POA
+# add a local for digits + 1 on the rest
+PUA
+#
+LAS 00000010
+PUN
+PUA
+PUI 00001010
+CAL divide
+PON
+PON
+POA
+PUN
+PUA
+PUI 00001010
+CAL remainder
+PON
+PON
+POA
+# add a local for digits + 1 on the rest
+PUA
+#
+LAS 00000011
+PUN
+PUA
+PUI 01100100
+CAL divide
+PON
+PON
+POA
+PUN
+PUA
+PUI 00001010
+CAL remainder
+PON
+PON
+POA
+# add a local for digits + 1 on the rest
+PUA
+#
+DIN 00000001
+DIN 00111000
+DIN 00001110
+DIN 00000110
+DIN 00000001
+POA
+ADI 00110000
+DSA
+POA
+ADI 00110000
+DSA
+POA
+ADI 00110000
+DSA
+RET
+# return value		at stack + 3
+# dividend		at stack + 2
+# divisor		at stack + 1
+# return address		at stack + 0
+.divide
+LAS	00000010
+STA	11111110		#dividend
+LAS	00000001
+STA	11111111		#divisor (decrementer)
+LAI	00000000
+STA	11111101		#init quotient (incrementer)
+LDA	11111111
+CPI	00000000
+JZ	youMessedUp	#check for divide by zero
+.loop
+LDA	11111110
+CMP	11111111
+JC	done		#Load dividend, compare with divisor, if underflow jump to end of prog
+SUR
+STA	11111110		#if not subtract and store "new" dividend
+LDA	11111101
+INC
+STA	11111101		#increment quotient
+JMP	loop
+.done
+LDA	11111101
+SAS	00000011	
+RET
+.youMessedUp
+OPI	10101010
+NOP
+NOP
+OPI	00000000
+NOP
+JMP	youMessedUp
+#
+.remainder
+LAS	00000010
+STA	11111110		#dividend
+LAS	00000001
+STA	11111111		#divisor (decrementer)
+LAI	00000000
+STA	11111101		#init quotient (incrementer)
+LDA	11111111
+CPI	00000000
+JZ	ryouMessedUp	#check for divide by zero
+.rloop
+LDA	11111110
+CMP	11111111
+JC	rdone		#Load dividend, compare with divisor, if underflow jump to end of prog
+SUR
+STA	11111110		#if not subtract and store "new" dividend
+LDA	11111101
+INC
+STA	11111101		#increment quotient
+JMP	rloop
+.rdone
+SAS	00000011	
+RET
+.ryouMessedUp
+OPI	10101010
+NOP
+NOP
+OPI	00000000
+NOP
+JMP	ryouMessedUp
